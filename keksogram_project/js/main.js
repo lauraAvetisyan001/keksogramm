@@ -19,10 +19,10 @@ function getPhotos(index){
     description: getRandomDescription(),
     likes: getRandomNumber(15, 201),
     }
-
 }
 
-const countOfComments = 7;
+
+const countOfComments = 30;
 
 const comments = new Array(countOfComments).fill(null).map((e) => getComments());
 
@@ -43,6 +43,23 @@ function getComments(){
      id: getRandomNumber(100, 900),
      avatar: `img/avatar-${getRandomNumber(1, 7)}.svg`,         
      message: getRandomMessage(),
-     name: getRandomName(),         
+     name: getRandomName(),     
+     comment: getRandomNumber(1, 30),    
     } 
+} 
+
+const pictureTemplate = document.getElementById('picture'),
+      pictureImg = pictureTemplate.content.querySelector('.picture__img'),
+      pictures = document.querySelector('.pictures'),
+      pictureComment = pictureTemplate.content.querySelector('.picture__comments'),
+      pictureLikes = pictureTemplate.content.querySelector('.picture__likes');
+
+const pictureInfo = data.map((e, index) => getPictureInfo(index));
+
+function getPictureInfo(index){     
+    pictureImg.src = data[index].url;
+    pictureComment.innerHTML = comments[index].comment;
+    pictureLikes.textContent = data[index].likes;
+    let cloneTemplate = pictureTemplate.content.cloneNode(true);
+    pictures.appendChild(cloneTemplate);
 }
