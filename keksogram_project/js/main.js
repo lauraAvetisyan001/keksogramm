@@ -60,6 +60,6 @@ function getPictureInfo(index){
     pictureImg.src = data[index].url;
     pictureComment.innerHTML = comments[index].comment;
     pictureLikes.textContent = data[index].likes;
-    let cloneTemplate = pictureTemplate.content.cloneNode(true);
+    const cloneTemplate = pictureTemplate.content.cloneNode(true);
     pictures.appendChild(cloneTemplate);
 }
