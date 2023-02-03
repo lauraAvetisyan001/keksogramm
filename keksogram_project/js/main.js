@@ -1,6 +1,32 @@
-const countOfPhotos = 25;
+const countOfComments = 25;
 
-const data = new Array(countOfPhotos).fill(null).map((e, index) => getPhotos(index));
+const comments = new Array(countOfComments).fill(null).map((e, index) => getComment(e, index));
+
+function getRandomMessage(){
+    const messages = ['Все відмінно!', 'Загалом все непогано. Але не всі.', 'Коли ви робите фотографію, добре б прибирати палець із кадру. Зрештою, це просто непрофесійно.', 'Моя бабуся випадково чхнула з фотоапаратом у руках і у неї вийшла фотографія краща.', 'Я послизнувся на банановій шкірці і впустив фотоапарат на кота і у мене вийшла фотографія краще.', 'Обличчя людей на фотці перекошені, ніби їх побивають. Як можна було зловити такий невдалий момент?', 'Супер фото!', 'Вау!', 'Прекрасно!'];
+    const randomArrayMessage = getRandomNumber(0, messages.length);
+    return messages[randomArrayMessage];
+} 
+
+function getRandomName(){
+    const name = ['Артем', 'Олена', 'Ігор', 'Ксенія', 'Володимир', 'Катя', 'Олексій', 'Тетяна', 'Саша', 'Вікторія', 'Тімур', 'Влада', 'Михайло'];
+    const randomName = getRandomNumber(0, name.length);
+    return name[randomName];
+}
+
+function getComment(e, index){
+    return{        
+     id: index+1,
+     avatar: `img/avatar-${getRandomNumber(1, 7)}.svg`,         
+     message: getRandomMessage(),
+     name: getRandomName(),   
+     
+    } 
+} 
+
+const countOfPosts = 25;
+
+const data = new Array(countOfPosts).fill(null).map((e, index) => getPost(index));
 
 function getRandomNumber(min, max){
     return Math.floor(Math.random() * (max - min) + min);
@@ -12,37 +38,38 @@ function getRandomDescription(){
   return descriptions[randomArrayNumber];
 }
 
-function getPhotos(index){
+function getPost(index){
+    const commentsNumber = getRandomNumber(5, 9);
+
     return {
-    id: index +1,
+    id: index,
     url: `photos/${index +1}.jpg`,
     description: getRandomDescription(),
     likes: getRandomNumber(15, 201),
-    }
+    comments: shuffle(comments).slice(0, commentsNumber),
+    }       
+} 
 
+function shuffle(array) {   
+    return array.sort(() => Math.random() - 0.5);
 }
+  
+const pictureTemplate = document.querySelector('#picture'),
+      pictureImg = pictureTemplate.content.querySelector('.picture__img'),
+      pictures = document.querySelector('.pictures'),
+      pictureComment = pictureTemplate.content.querySelector('.picture__comments'),
+      pictureLikes = pictureTemplate.content.querySelector('.picture__likes');
 
-const countOfComments = 7;
+const pictureInfo = data.map((e, index) => getPictureInfo(e,index));
 
-const comments = new Array(countOfComments).fill(null).map((e) => getComments());
+function getPictureInfo(e,index){     
+    pictureImg.src = e.url;
+    pictureImg.dataset.id = e.id;
+    pictureComment.textContent = e.comments.length;
+    pictureLikes.textContent = e.likes;
+    const cloneTemplate = pictureTemplate.content.cloneNode(true);
+    pictures.appendChild(cloneTemplate);
+};
 
-function getRandomMessage(){
-    const messages = ['Все відмінно!', 'Загалом все непогано. Але не всі.', 'Коли ви робите фотографію, добре б прибирати палець із кадру. Зрештою, це просто непрофесійно.', 'Моя бабуся випадково чхнула з фотоапаратом у руках і у неї вийшла фотографія краща.', 'Я послизнувся на банановій шкірці і впустив фотоапарат на кота і у мене вийшла фотографія краще.', 'Обличчя людей на фотці перекошені, ніби їх побивають. Як можна було зловити такий невдалий момент?'];
-    const randomArrayMessage = getRandomNumber(0, messages.length);
-    return messages[randomArrayMessage];
-}
 
-function getRandomName(){
-    const name = ['Артем', 'Олена', 'Ігор', 'Ксенія', 'Володимир', 'Катя', 'Олексій', 'Тетяна', 'Саша', 'Вікторія', 'Тімур', 'Влада', 'Михайло'];
-    const randomName = getRandomNumber(0, name.length);
-    return name[randomName];
-}
-
-function getComments(){
-    return{        
-     id: getRandomNumber(100, 900),
-     avatar: `img/avatar-${getRandomNumber(1, 7)}.svg`,         
-     message: getRandomMessage(),
-     name: getRandomName(),         
-    } 
-}
+export {data, pictures};
