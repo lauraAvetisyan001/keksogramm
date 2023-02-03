@@ -44,28 +44,11 @@ function showComments(){
 }
 
 
-
-
-
-
-// let commentsList; 
-
-// function showComments(data){ 
-//     post.comments.forEach((comment)=>{
-//    commentsList += `
-//     <li class="social__comment">
-//     <img class="social__picture" src="${comment.avatar}" alt="${comment.name}" width="35" height="35">
-//     <p class="social__text">${comment.message}</p>
-//   </li>
-//     `  
-//   });
-//   socialComments.innerHTML = commentsList;  
-// }  
-
 pictureCancelButton.addEventListener('click', ()=>{
   bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
 })
+
 
 function escBigPhoto(e){
   if(e.keyCode === 27){
