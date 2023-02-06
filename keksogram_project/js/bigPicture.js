@@ -14,7 +14,7 @@ let post;
 
 pictures.addEventListener('click', (evt)=>{
   document.body.classList.add('modal-open');
-  let photoId = +evt.target.dataset.id;
+  const photoId = +evt.target.dataset.id;
   post = data.find(data => data.id === photoId);
   showComments();
   showBigImg();
