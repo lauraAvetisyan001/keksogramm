@@ -58,11 +58,17 @@ const pictureTemplate = document.querySelector('#picture'),
       pictureImg = pictureTemplate.content.querySelector('.picture__img'),
       pictures = document.querySelector('.pictures'),
       pictureComment = pictureTemplate.content.querySelector('.picture__comments'),
-      pictureLikes = pictureTemplate.content.querySelector('.picture__likes');
+      pictureLikes = pictureTemplate.content.querySelector('.picture__likes'),
+      imgUploadLabel = document.querySelector('.img-upload__label'),
+      imgUploadOverlay = document.querySelector('.img-upload__overlay');
+
+imgUploadLabel.addEventListener('click', ()=>{
+    imgUploadOverlay.classList.remove('hidden')
+});
 
 const pictureInfo = data.map((e, index) => getPictureInfo(e,index));
 
-function getPictureInfo(e,index){     
+function getPictureInfo(e,index){    
     pictureImg.src = e.url;
     pictureImg.dataset.id = e.id;
     pictureComment.textContent = e.comments.length;
