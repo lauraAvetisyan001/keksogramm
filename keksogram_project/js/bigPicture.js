@@ -12,14 +12,16 @@ const bigPicture = document.querySelector('.big-picture'),
 
 let post;
 
-pictures.addEventListener('click', (evt)=>{
-  document.body.classList.add('modal-open');
-  const photoId = +evt.target.dataset.id;
-  post = data.find(data => data.id === photoId);
-  showComments();
-  showBigImg();
-});  
+export function showPopup(){
+  pictures.addEventListener('click', (evt)=>{
+    document.body.classList.add('modal-open');
+    const photoId = +evt.target.dataset.id;
+    post = data.find(data => data.id === photoId);
+    showComments();
+    showBigImg();
+  })};  
 
+  
 function showBigImg(){
   bigPicture.classList.remove('hidden');
   bigPictureImg.src = post.url;
