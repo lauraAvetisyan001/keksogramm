@@ -12,13 +12,14 @@ const bigPicture = document.querySelector('.big-picture'),
 
 let post;
 
+export function showPopup(){
 pictures.addEventListener('click', (evt)=>{
   document.body.classList.add('modal-open');
   const photoId = +evt.target.dataset.id;
   post = data.find(data => data.id === photoId);
   showComments();
   showBigImg();
-});  
+})};  
 
 function showBigImg(){
   bigPicture.classList.remove('hidden');
@@ -56,5 +57,4 @@ function escBigPhoto(e){
     document.body.classList.remove('modal-open');
   }
 } 
-
 document.addEventListener('keydown', escBigPhoto);
