@@ -19,8 +19,9 @@ pictures.addEventListener('click', (evt)=>{
   post = data.find(data => data.id === photoId);
   showComments();
   showBigImg();
-})};  
+})}; 
 
+  
 function showBigImg(){
   bigPicture.classList.remove('hidden');
   bigPictureImg.src = post.url;
