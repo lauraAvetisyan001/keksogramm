@@ -1,3 +1,7 @@
+import {showPopup} from './bigPicture.js';
+import {validateHashtagInput} from './validate.js'
+
+
 const countOfComments = 25;
 
 const comments = new Array(countOfComments).fill(null).map((e, index) => getComment(e, index));
@@ -58,11 +62,20 @@ const pictureTemplate = document.querySelector('#picture'),
       pictureImg = pictureTemplate.content.querySelector('.picture__img'),
       pictures = document.querySelector('.pictures'),
       pictureComment = pictureTemplate.content.querySelector('.picture__comments'),
-      pictureLikes = pictureTemplate.content.querySelector('.picture__likes');
+      pictureLikes = pictureTemplate.content.querySelector('.picture__likes'),
+      uploadFile = document.querySelector('#upload-file'),
+      imgUploadOverlay = document.querySelector('.img-upload__overlay');
+
+uploadFile.addEventListener('change', (e)=>{
+    if(e.target.name === 'filename'){
+        imgUploadOverlay.classList.remove('hidden');
+    }
+});
 
 const pictureInfo = data.map((e, index) => getPictureInfo(e,index));
 
-function getPictureInfo(e,index){     
+function getPictureInfo(e,index){    
+
     pictureImg.src = e.url;
     pictureImg.dataset.id = e.id;
     pictureComment.textContent = e.comments.length;
@@ -71,5 +84,8 @@ function getPictureInfo(e,index){
     pictures.appendChild(cloneTemplate);
 };
 
+showPopup();
+
+validateHashtagInput();
 
 export {data, pictures};
