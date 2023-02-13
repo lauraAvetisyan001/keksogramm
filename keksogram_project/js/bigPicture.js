@@ -10,7 +10,7 @@ const bigPicture = document.querySelector('.big-picture'),
       pictureCancelButton = document.querySelector('#picture-cancel');
 
 
-let post;
+let post; 
 
 export function showPopup(){
   pictures.addEventListener('click', (evt)=>{
