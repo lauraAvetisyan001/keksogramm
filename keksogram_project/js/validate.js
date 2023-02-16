@@ -1,13 +1,14 @@
 const hashtagText = document.querySelector('.text__hashtags'),
       descriptionText = document.querySelector('.text__description'),
-      submitBtn = document.querySelector('.img-upload__submit'),
       imgUploadOverlay = document.querySelector('.img-upload__overlay'),
       cancelBtn = document.querySelector('#upload-cancel');
+
 
 export function validateHashtagInput(){
       hashtagText.addEventListener('input', (evt)=>{
     validate(evt);
 })};
+
 
 function validate(evt){
     evt.target.setCustomValidity('');
@@ -40,7 +41,7 @@ function chekHashtag(tagsArray, evt){
 
 tagsArray.forEach((elem, index, array)=>{
     const elemArray = elem.split('');
-
+console.log('index', index); console.log(elemArray, 'ele'); console.log(array, 'array');
     if(elemArray[0] !== '#'){
         evt.target.setCustomValidity('Первым элементом должна быть решетка!');
     } else if (elemArray.length < 2){
