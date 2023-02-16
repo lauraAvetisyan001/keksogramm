@@ -73,6 +73,7 @@ uploadFile.addEventListener('change', (e)=>{
 const pictureInfo = data.map((e, index) => getPictureInfo(e,index));
 
 function getPictureInfo(e,index){    
+
     pictureImg.src = e.url;
     pictureImg.dataset.id = e.id;
     pictureComment.textContent = e.comments.length;
@@ -80,6 +81,7 @@ function getPictureInfo(e,index){
     const cloneTemplate = pictureTemplate.content.cloneNode(true);
     pictures.appendChild(cloneTemplate);
 };
+
 showPopup();
 
 validateHashtagInput();

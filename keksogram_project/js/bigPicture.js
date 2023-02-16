@@ -26,6 +26,7 @@ export function showPopup(){
 
   })};  
 
+
   function showCurrentComments(){ 
     if(data.comments.length - currentCommentsCount > 5){
       currentCommentsCount = currentCommentsCount + 5
@@ -100,6 +101,8 @@ function escBigPhoto(e){
 } 
 
 
+
 document.addEventListener('keydown', escBigPhoto);
 
 export{post};
+
