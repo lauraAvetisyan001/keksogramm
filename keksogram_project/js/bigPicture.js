@@ -14,76 +14,85 @@ const bigPicture = document.querySelector('.big-picture'),
 
 let post;  
 let currentCommentsCount = 5;
-let comSlice;
+let commentSlice;
 
 export function showPopup(){
   pictures.addEventListener('click', (evt)=>{
+    currentCommentsCount = 5;
+    commentsBtn.classList.remove('hidden');
     document.body.classList.add('modal-open');
     const photoId = +evt.target.dataset.id;
     post = data.find(data => data.id === photoId);
     showComments();
     showBigImg(); 
-
+    commentsCountHidden();
+    addComments();
   })};  
 
 
   function showCurrentComments(){ 
-    if(data.comments.length - currentCommentsCount > 5){
+    if(post.comments.length - currentCommentsCount > 5){
       currentCommentsCount = currentCommentsCount + 5
     } else {
-      currentCommentsCount = data.comments.length
-    }
-  }
- 
-  
-
-  function addComments(){
-    comSlice = post.comments.slice(0, currentCommentsCount);
-    socialCommentsCount.textContent = `${comSlice.length} из ${post.comments.length} комментарів`
-    console.log(comSlice)
+      currentCommentsCount = post.comments.length
+    }  
   }
 
-
-
-  commentsBtn.addEventListener('click', () => {
-    showCurrentComments()
-    addComments()
-
-  });
-
+  function commentsCountHidden(){
+  switch(post.comments.length){
+    case 3:
+      socialCommentsCount.textContent = `${post.comments.length} коментаря`;
+      commentsBtn.classList.add('hidden');
+      break;
+    case 4:
+      socialCommentsCount.textContent = `${post.comments.length} коментаря`;
+      commentsBtn.classList.add('hidden');
+      break;
+    case 5:
+      socialCommentsCount.textContent = `${post.comments.length} коментарів`;
+      commentsBtn.classList.add('hidden')
+    break;     
+  }
+}
 
 
 function showBigImg(){
   bigPicture.classList.remove('hidden');
   bigPictureImg.src = post.url;
   likesCount.textContent = post.likes;
-  commentsCount.textContent = post.comments.length;
-  imgDescription.textContent = post.description;
-
+  // commentsCount.textContent = post.comments.length;
+  imgDescription.textContent = post.description; 
 }
-
 
 const commentsFragment = new DocumentFragment();
 
 function showComments(){
-  post.comments.forEach((comment)=>{
+    post.comments.forEach((comment)=>{
     const socialCommentClone = socialComment.cloneNode(true);
-    socialCommentClone.querySelector('.social__text').textContent = comment.message
-    socialCommentClone.querySelector('.social__picture').alt = comment.name
-    socialCommentClone.querySelector('.social__picture').src = comment.avatar
-    commentsFragment.append(socialCommentClone); 
-  })
-  socialComments.textContent = '';
-  
-  socialComments.append(commentsFragment);
+      socialCommentClone.querySelector('.social__text').textContent = comment.message
+      socialCommentClone.querySelector('.social__picture').alt = comment.name
+      socialCommentClone.querySelector('.social__picture').src = comment.avatar
+      commentsFragment.append(socialCommentClone); 
+    })
+    socialComments.textContent = '';
+    
+    socialComments.append(commentsFragment);
+
+  }
+ 
+function addComments(){
+  commentSlice = post.comments.slice(0, currentCommentsCount);   
+  console.log(commentSlice, 'commentSlice') //массив по 5 комментов
+
+  socialCommentsCount.textContent = `${currentCommentsCount} из ${post.comments.length} комментарів`
 }
 
 
-
-      
-
-
-
+commentsBtn.addEventListener('click', () => {
+  showCurrentComments()
+  addComments()
+  showBigImg()
+});
 
 
 
@@ -92,7 +101,6 @@ pictureCancelButton.addEventListener('click', ()=>{
   document.body.classList.remove('modal-open');
 })
 
-
 function escBigPhoto(e){
   if(e.keyCode === 27){
     bigPicture.classList.add('hidden');
@@ -100,9 +108,6 @@ function escBigPhoto(e){
   }
 } 
 
-
-
 document.addEventListener('keydown', escBigPhoto);
 
 export{post};
-
