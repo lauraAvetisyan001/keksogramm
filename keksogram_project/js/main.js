@@ -43,7 +43,7 @@ function getRandomDescription(){
 }
 
 function getPost(index){
-    const commentsNumber = getRandomNumber(5, 9);
+    const commentsNumber = getRandomNumber(3, 25);
 
     return {
     id: index,
