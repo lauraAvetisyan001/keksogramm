@@ -41,7 +41,8 @@ function getRandomNumber(min, max){
 }
 
 function getPost(index){
-    const commentsNumber = getRandomNumber(5, 25);
+    const commentsNumber = getRandomNumber(3, 25);
+
     return {
     id: photosPromise[index].id,
     url: photosPromise[index].url,
