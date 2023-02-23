@@ -24,7 +24,9 @@ export function showPopup(){
     showBigImg(); 
     hiddenCommentsBtn();
     addComments();
+    
   })};  
+
 
   function showComments(){
     post.comments.forEach((comment)=>{
@@ -47,7 +49,7 @@ function showCommentsCount(){
       currentCommentsCount = post.comments.length;
     }  
   }
-  
+
 function hiddenCommentsBtn(){
   switch(post.comments.length){
     case 3:
