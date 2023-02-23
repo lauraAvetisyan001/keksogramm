@@ -1,6 +1,6 @@
 import {showPopup} from './bigPicture.js';
 import {validateHashtagInput} from './validate.js';
-
+import {handleEffect} from './filterPhotos.js'
 
 const photosPromise = await fetch('http://localhost:8000/photos')
     .then(function (resp) {
@@ -80,10 +80,12 @@ function getPictureInfo(e,index){
     pictureLikes.textContent = e.likes;
     const cloneTemplate = pictureTemplate.content.cloneNode(true);
     pictures.appendChild(cloneTemplate);
-};
+}; 
 
 showPopup();
 
 validateHashtagInput();
+
+handleEffect();
 
 export {data, pictures};
