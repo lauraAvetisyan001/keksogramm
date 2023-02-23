@@ -24,16 +24,7 @@ export function showPopup(){
     showBigImg(); 
     hiddenCommentsBtn();
     addComments();
-    console.log(pictures)
   })};  
-  
-function showCommentsCount(){ 
-    if(post.comments.length - currentCommentsCount > 5){
-      currentCommentsCount += 5;
-    } else {
-      currentCommentsCount = post.comments.length;
-    }  
-  }
 
   function showComments(){
     post.comments.forEach((comment)=>{
@@ -48,6 +39,15 @@ function showCommentsCount(){
     socialComments.append(commentsFragment)
   }
 
+  
+function showCommentsCount(){ 
+    if(post.comments.length - currentCommentsCount > 5){
+      currentCommentsCount += 5;
+    } else {
+      currentCommentsCount = post.comments.length;
+    }  
+  }
+  
 function hiddenCommentsBtn(){
   switch(post.comments.length){
     case 3:

@@ -2,7 +2,11 @@ const scaleSmoller = document.querySelector('.scale__control--smaller'),
       scaleBigger = document.querySelector('.scale__control--bigger'),
       scaleValue = document.querySelector('.scale__control--value'),
       imgUploadPreview  = document.querySelector('.img-upload__preview'),
-      imgEffectLevel = document.querySelector('.img-upload__effect-level');
+      imgEffectLevel = document.querySelector('.img-upload__effect-level'),
+      marvinEff = document.querySelector('.effects__preview--marvin'),
+      phobosEff = document.querySelector('.effects__preview--phobos'),
+      heatEff = document.querySelector('.effects__preview--heat');
+
 
 let scaleValueStep = 25   
 
@@ -24,8 +28,6 @@ function addingScale(){
     }
 }
 
-//=============================================
-
 const effectsList = document.querySelector('.effects__list');
 
 effectsList.addEventListener('click', (e)=>{ 
@@ -34,14 +36,11 @@ effectsList.addEventListener('click', (e)=>{
 
     imgUploadPreview.classList = 'img-upload__preview';
     imgUploadPreview.classList.add(`effects__preview--${effectsRadio.value}`);
- 
-
     imgEffectLevel.noUiSlider.reset()
 })
 
 
 export function handleEffect(value){
-
     if(imgUploadPreview.classList.contains('effects__preview--chrome')){
         imgUploadPreview.style.filter = `grayscale(${value})`
       } else if(imgUploadPreview.classList.contains('effects__preview--phobos')){
@@ -56,13 +55,6 @@ export function handleEffect(value){
         imgUploadPreview.style.filter = `sepia(${value})`
       }
 }
-
-
-const marvinEff = document.querySelector('.effects__preview--marvin');
-const phobosEff = document.querySelector('.effects__preview--phobos');
-const heatEff = document.querySelector('.effects__preview--heat');
-
-
 
 noUiSlider.create(imgEffectLevel, {
     start: 100,
