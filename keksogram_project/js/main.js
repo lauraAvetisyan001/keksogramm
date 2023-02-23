@@ -1,6 +1,6 @@
 import {showPopup} from './bigPicture.js';
 import {validateHashtagInput} from './validate.js';
-import {handleEffect} from './filterPhotos.js'
+import {changeEffect} from './filterPhotos.js'
 
 const photosPromise = await fetch('http://localhost:8000/photos')
     .then(function (resp) {
@@ -86,6 +86,6 @@ showPopup();
 
 validateHashtagInput();
 
-handleEffect();
+changeEffect();
 
 export {data, pictures};

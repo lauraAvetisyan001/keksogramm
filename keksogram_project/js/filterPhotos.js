@@ -12,7 +12,7 @@ let scaleValueStep = 25
 
 scaleValue.value = parseInt(scaleValue.value.match(/\d+/));
 
-function smallingScale(){
+function scaleDown(){
     if(scaleValue.value > 25){
         scaleValue.value = `${scaleValue.value - scaleValueStep}`;
 
@@ -20,7 +20,7 @@ function smallingScale(){
     }
 }
 
-function addingScale(){
+function increaseScale(){
     if(scaleValue.value < 100){
     scaleValue.value = Number(scaleValue.value) + Number(scaleValueStep)
     
@@ -40,7 +40,7 @@ effectsList.addEventListener('click', (e)=>{
 })
 
 
-export function handleEffect(value){
+export function changeEffect(value){
     if(imgUploadPreview.classList.contains('effects__preview--chrome')){
         imgUploadPreview.style.filter = `grayscale(${value})`
       } else if(imgUploadPreview.classList.contains('effects__preview--phobos')){
@@ -98,8 +98,8 @@ marvinEff.addEventListener('click', ()=>{
     });
 })
 
-imgEffectLevel.noUiSlider.on('update', handleEffect)
+imgEffectLevel.noUiSlider.on('update', changeEffect)
 
-scaleSmoller.addEventListener('click', smallingScale);
+scaleSmoller.addEventListener('click', scaleDown);
 
-scaleBigger.addEventListener('click', addingScale);
+scaleBigger.addEventListener('click', increaseScale);
