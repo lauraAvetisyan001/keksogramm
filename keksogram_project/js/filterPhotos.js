@@ -5,10 +5,10 @@ const scaleSmoller = document.querySelector('.scale__control--smaller'),
       imgEffectLevel = document.querySelector('.img-upload__effect-level'),
       marvinEff = document.querySelector('.effects__preview--marvin'),
       phobosEff = document.querySelector('.effects__preview--phobos'),
-      heatEff = document.querySelector('.effects__preview--heat');
+      heatEff = document.querySelector('.effects__preview--heat'),
+      noneEff = document.querySelector('.effects__preview--none');
 
-
-let scaleValueStep = 25   
+let scaleValueStep = 25;
 
 scaleValue.value = parseInt(scaleValue.value.match(/\d+/));
 
@@ -16,7 +16,7 @@ function scaleDown(){
     if(scaleValue.value > 25){
         scaleValue.value = `${scaleValue.value - scaleValueStep}`;
 
-        imgUploadPreview.style.transform = `scale(${scaleValue.value / 100})`
+        imgUploadPreview.style.transform = `scale(${scaleValue.value / 100})`;
     }
 }
 
@@ -37,15 +37,16 @@ effectsList.addEventListener('click', (e)=>{
     imgUploadPreview.classList = 'img-upload__preview';
     imgUploadPreview.classList.add(`effects__preview--${effectsRadio.value}`);
     imgEffectLevel.noUiSlider.reset()
+ 
 })
-
 
 export function changeEffect(value){
     if(imgUploadPreview.classList.contains('effects__preview--chrome')){
         imgUploadPreview.style.filter = `grayscale(${value})`
       } else if(imgUploadPreview.classList.contains('effects__preview--phobos')){
          imgUploadPreview.style.filter = `blur(${value}px)`
-      } else if(imgUploadPreview.classList.contains('effects__preview--none')){        
+      } else if(imgUploadPreview.classList.contains('effects__preview--none')){       
+        //imgEffectLevel.noUiSlider.destroy(); 
         imgUploadPreview.style.filter = 'none'       
       } else if(imgUploadPreview.classList.contains('effects__preview--marvin')){
         imgUploadPreview.style.filter = `invert(${value}%)`
@@ -56,12 +57,14 @@ export function changeEffect(value){
       }
 }
 
+
 noUiSlider.create(imgEffectLevel, {
     start: 100,
     range: {
         'min': 0,
         'max': 1
     },
+    tooltips: true,
     step: 0.1,
 });
 
@@ -97,6 +100,7 @@ marvinEff.addEventListener('click', ()=>{
         step: 1
     });
 })
+
 
 imgEffectLevel.noUiSlider.on('update', changeEffect)
 
