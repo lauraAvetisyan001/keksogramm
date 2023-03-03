@@ -10,7 +10,7 @@ const bigPicture = document.querySelector('.big-picture'),
       commentsBtn = document.querySelector('.social__comments-loader'),    
       pictureCancelButton = document.querySelector('#picture-cancel');
 
-export let post;  
+let post;  
 let currentCommentsCount;
 
 
