@@ -41,7 +41,7 @@ function chekHashtag(tagsArray, evt){
 
 tagsArray.forEach((elem, index, array)=>{
     const elemArray = elem.split('');
-console.log('index', index); console.log(elemArray, 'ele'); console.log(array, 'array');
+
     if(elemArray[0] !== '#'){
         evt.target.setCustomValidity('Первым элементом должна быть решетка!');
     } else if (elemArray.length < 2){

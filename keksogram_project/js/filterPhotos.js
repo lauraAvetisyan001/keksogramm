@@ -107,3 +107,6 @@ imgEffectLevel.noUiSlider.on('update', changeEffect)
 scaleSmoller.addEventListener('click', scaleDown);
 
 scaleBigger.addEventListener('click', increaseScale);
+
+
+
