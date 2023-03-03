@@ -29,35 +29,32 @@ const sendData = async(url, photoData) =>{
     if(!response.ok){
         throw new Error('sorry')
     }
-
     return await response.json()
 }      
 
-
 export function sendPhotos(){   
-    imgForm.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        let photoData = {
-                id: photosPromise.length + 1,
-                filter: imgUploadPreview.style.filter,
-                scale: scaleValue.value,
-                url: img.src, 
-                description: textDescription.value,
-                likes: 0,
-                comments: [],
-                hashtags: textHashtag.value,
-               }
+imgForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    let photoData = {
+        id: photosPromise.length + 1,
+        filter: imgUploadPreview.style.filter,
+        scale: scaleValue.value,
+        url: img.src, 
+        description: textDescription.value,
+        likes: 0,
+        comments: [],
+        hashtags: textHashtag.value,
+    }
 
 const photoInfo = JSON.stringify(photoData);
 
-    sendData('http://localhost:8000/newphoto', photoData)
-        .then(()=>{
-        showSuccessMessage()
-        }).catch((err)=>{
-        showErrorMessage(err)
-        });
-            
-        
+sendData('http://localhost:8000/newphoto', photoData)
+    .then(()=>{
+    showSuccessMessage()
+    }).catch((err)=>{
+    showErrorMessage(err)
+    });
+
     imgForm.reset()
     imgUploadOverlay.classList.add('hidden');
     document.body.classList.remove('modal-open')
@@ -74,7 +71,6 @@ function showSuccessMessage(){
         location.reload()
     })
 }; 
-
 
 function showErrorMessage(err){
     const errorTmpl = document.querySelector('#error');

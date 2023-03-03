@@ -28,7 +28,7 @@ export function showPopup(){
   })}; 
   
 
-  function showComments(){
+function showComments(){
     post.comments.forEach((comment)=>{
       const socialCommentClone = socialComment.cloneNode(true);
       socialCommentClone.querySelector('.social__text').textContent = comment.message
@@ -45,8 +45,6 @@ export function showPopup(){
 function showCommentsCount(){ 
     if(post.comments.length - currentCommentsCount > 5){
       currentCommentsCount += 5;
-    } else if(post.comments.length === 0){
-      currentCommentsCount = 0;
     }
      else {
       currentCommentsCount = post.comments.length;
