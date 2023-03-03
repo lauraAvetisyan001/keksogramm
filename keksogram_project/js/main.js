@@ -1,6 +1,6 @@
 import {showPopup} from './bigPicture.js';
 import {validateHashtagInput} from './validate.js';
-
+import {changeEffect} from './filterPhotos.js'
 
 const photosPromise = await fetch('http://localhost:8000/photos')
     .then(function (resp) {
@@ -52,7 +52,6 @@ function getPost(index){
     }       
 } 
 
-
 function shuffle(array) {   
     return array.sort(() => Math.random() - 0.5);
 }
@@ -81,10 +80,12 @@ function getPictureInfo(e,index){
     pictureLikes.textContent = e.likes;
     const cloneTemplate = pictureTemplate.content.cloneNode(true);
     pictures.appendChild(cloneTemplate);
-};
+}; 
 
 showPopup();
 
 validateHashtagInput();
+
+changeEffect();
 
 export {data, pictures};

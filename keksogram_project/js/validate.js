@@ -69,8 +69,8 @@ function escapeUpload(e){
         onCloseUpload();
     }
 }
-document.addEventListener('keydown', escapeUpload);
 
+document.addEventListener('keydown', escapeUpload);
 
 hashtagText.addEventListener('focus', ()=>{
     document.removeEventListener('keydown', escapeUpload); 

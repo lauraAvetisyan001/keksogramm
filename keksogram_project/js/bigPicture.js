@@ -18,13 +18,29 @@ export function showPopup(){
   pictures.addEventListener('click', (evt)=>{
     currentCommentsCount = 5;
     commentsBtn.classList.remove('hidden');
-    document.body.classList.add('modal-open');
     const photoId = +evt.target.dataset.id;
     post = data.find(data => data.id === photoId); 
+    showComments()
     showBigImg(); 
     hiddenCommentsBtn();
     addComments();
+    
   })};  
+
+
+  function showComments(){
+    post.comments.forEach((comment)=>{
+      const socialCommentClone = socialComment.cloneNode(true);
+      socialCommentClone.querySelector('.social__text').textContent = comment.message
+      socialCommentClone.querySelector('.social__picture').alt = comment.name
+      socialCommentClone.querySelector('.social__picture').src = comment.avatar
+      commentsFragment.append(socialCommentClone)
+    })
+    socialComments.textContent = '';
+    
+    socialComments.append(commentsFragment)
+  }
+
   
 function showCommentsCount(){ 
     if(post.comments.length - currentCommentsCount > 5){
