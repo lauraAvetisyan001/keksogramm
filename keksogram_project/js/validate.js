@@ -39,6 +39,7 @@ function validate(evt){
 function chekHashtag(tagsArray, evt){
     const regNameSymbols = /^[A-Za-z0-9\s]*$/;
 
+
 tagsArray.forEach((elem, index, array)=>{
     const elemArray = elem.split('');
 
@@ -69,7 +70,6 @@ function escapeUpload(e){
         onCloseUpload();
     }
 }
-
 document.addEventListener('keydown', escapeUpload);
 
 hashtagText.addEventListener('focus', ()=>{

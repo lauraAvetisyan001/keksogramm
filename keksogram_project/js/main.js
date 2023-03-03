@@ -21,14 +21,16 @@ export const commentsPromise = await fetch('http://localhost:8000/comments')
       });
     
 const uploadFile = document.querySelector('#upload-file'),
-      imgUploadOverlay = document.querySelector('.img-upload__overlay');
+imgUploadOverlay = document.querySelector('.img-upload__overlay');
       
 
 uploadFile.addEventListener('change', (e)=>{
     if(e.target.name === 'filename'){
         imgUploadOverlay.classList.remove('hidden');
+        document.body.classList.add('modal-open')
     }
 }); 
+
 
 const pictureTemplate = document.querySelector('#picture'),
       pictureImg = pictureTemplate.content.querySelector('.picture__img'),

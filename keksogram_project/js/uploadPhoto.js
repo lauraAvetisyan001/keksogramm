@@ -51,8 +51,8 @@ const photoInfo = JSON.stringify(photoData);
 sendData('http://localhost:8000/newphoto', photoData)
     .then(()=>{
     showSuccessMessage()
-    }).catch((err)=>{
-    showErrorMessage(err)
+    }).catch(()=>{
+    showErrorMessage()
     });
 
     imgForm.reset()
@@ -61,23 +61,45 @@ sendData('http://localhost:8000/newphoto', photoData)
     }); 
 };
 
+const successTmpl = document.querySelector('#success');
+const cloneSuccessTmpl = successTmpl.content.cloneNode(true);
+const successBtn = cloneSuccessTmpl.querySelector('.success__button');
+const successInner = cloneSuccessTmpl.querySelector('.success__inner')
+
+
 function showSuccessMessage(){
-    const successTmpl = document.querySelector('#success');
-    const cloneSuccessTmpl = successTmpl.content.cloneNode(true);
-   
     document.body.appendChild(cloneSuccessTmpl);
-    const successBtn = cloneSuccessTmpl.querySelector('.success__button');
-    successBtn.addEventListener('click', ()=>{
-        location.reload()
-    })
+    if(!e.target.closest('#success')){
+        successInner.classList.add('hidden');
+    };
 }; 
 
-function showErrorMessage(err){
-    const errorTmpl = document.querySelector('#error');
-    const cloneErrorTmpl = errorTmpl.content.cloneNode(true);
-    const errorBtn = cloneErrorTmpl.querySelector('.error__button');
+const errorTmpl = document.querySelector('#error');
+const cloneErrorTmpl = errorTmpl.content.cloneNode(true);
+const errorBtn = cloneErrorTmpl.querySelector('.error__button');
+const errorInner = cloneErrorTmpl.querySelector('.error__inner');
+
+function showErrorMessage(){
     document.body.appendChild(cloneErrorTmpl);
-    errorBtn.addEventListener('click', ()=>{
-        location.reload();
-    })
+      document.addEventListener('click', (e)=>{
+            if(!e.target.closest('#error')){
+                errorInner.classList.add('hidden');
+            }});
 }
+
+
+errorBtn.addEventListener('click', ()=>{
+    errorInner.classList.add('hidden');
+})
+
+document.addEventListener('keydown', (e)=>{
+    if(e.keyCode === 27){
+        errorInner.classList.add('hidden');
+        successInner.classList.add('hidden');
+    }
+})
+
+
+successBtn.addEventListener('click', ()=>{
+    successInner.classList.add('hidden');
+})

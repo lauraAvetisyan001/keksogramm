@@ -24,7 +24,7 @@ export function showPopup(){
     showComments()
     showBigImg(); 
     hiddenCommentsBtn();
-    addComments();
+    addComments(); 
   })}; 
   
 
@@ -127,3 +127,23 @@ function escBigPhoto(e){
 
 
 document.addEventListener('keydown', escBigPhoto);
+
+
+
+const likesCounter = document.querySelector('.likes-count');
+
+let like = true;
+
+function getLikes(post){
+  if(like){
+    likesCounter.innerText++
+    like = false;
+  } else{
+    likesCounter.innerText--
+    like = true;
+    
+  }
+ 
+}
+
+likesCounter.addEventListener('click', getLikes)
