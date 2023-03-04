@@ -1,4 +1,6 @@
 import{photosPromise} from './main.js';
+import { hashtagText } from './validate.js';
+
 
 const imgForm = document.querySelector('#upload-select-image'),
 textHashtag = document.querySelector('.text__hashtags'),
@@ -30,12 +32,12 @@ const sendData = async(url, photoData) =>{
         throw new Error('sorry')
     }
     return await response.json()
-}      
+}     
 
 export function sendPhotos(){   
 imgForm.addEventListener('submit', (e)=>{
     e.preventDefault();
-    let photoData = {
+    const photoData = {
         id: photosPromise.length + 1,
         filter: imgUploadPreview.style.filter,
         scale: scaleValue.value,
@@ -44,10 +46,9 @@ imgForm.addEventListener('submit', (e)=>{
         likes: 0,
         comments: [],
         hashtags: textHashtag.value,
-    }
+    }; 
 
 const photoInfo = JSON.stringify(photoData);
-
 sendData('http://localhost:8000/newphoto', photoData)
     .then(()=>{
     showSuccessMessage()
@@ -57,7 +58,7 @@ sendData('http://localhost:8000/newphoto', photoData)
 
     imgForm.reset()
     imgUploadOverlay.classList.add('hidden');
-    document.body.classList.remove('modal-open')
+    document.body.classList.remove('modal-open');   
     }); 
 };
 
@@ -65,7 +66,6 @@ const successTmpl = document.querySelector('#success');
 const cloneSuccessTmpl = successTmpl.content.cloneNode(true);
 const successBtn = cloneSuccessTmpl.querySelector('.success__button');
 const successInner = cloneSuccessTmpl.querySelector('.success__inner')
-
 
 function showSuccessMessage(){
     document.body.appendChild(cloneSuccessTmpl);
@@ -87,6 +87,14 @@ function showErrorMessage(){
             }});
 }
 
+
+function emptyHashtagsValue(){
+    if(hashtagText.value.length === 0){
+        hashtagText.style.border = '3px solid red'
+        hashtagText.style.borderStyle = 'dashed'
+    } 
+}
+document.querySelector('.img-upload__submit').addEventListener('click', emptyHashtagsValue)
 
 errorBtn.addEventListener('click', ()=>{
     errorInner.classList.add('hidden');

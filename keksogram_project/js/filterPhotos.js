@@ -6,6 +6,8 @@ const scaleSmoller = document.querySelector('.scale__control--smaller'),
       marvinEff = document.querySelector('.effects__preview--marvin'),
       phobosEff = document.querySelector('.effects__preview--phobos'),
       heatEff = document.querySelector('.effects__preview--heat'),
+      chromeEff = document.querySelector('.effects__preview--chrome'),
+      sepiaEff = document.querySelector('.effects__preview--sepia'),
       noneEff = document.querySelector('.effects__preview--none');
 
 let scaleValueStep = 25;
@@ -45,15 +47,15 @@ export function changeEffect(value){
         imgUploadPreview.style.filter = `grayscale(${value})`
       } else if(imgUploadPreview.classList.contains('effects__preview--phobos')){
          imgUploadPreview.style.filter = `blur(${value}px)`
-      } else if(imgUploadPreview.classList.contains('effects__preview--none')){       
-        //imgEffectLevel.noUiSlider.destroy(); 
-        imgUploadPreview.style.filter = 'none'       
       } else if(imgUploadPreview.classList.contains('effects__preview--marvin')){
         imgUploadPreview.style.filter = `invert(${value}%)`
       } else if(imgUploadPreview.classList.contains('effects__preview--heat')){
         imgUploadPreview.style.filter = `brightness(${value})`
       } else if(imgUploadPreview.classList.contains('effects__preview--sepia')){
         imgUploadPreview.style.filter = `sepia(${value})`
+      } else{
+        // imgEffectLevel.noUiSlider.destroy(); 
+        imgUploadPreview.style.filter = 'none'       
       }
 }
 
@@ -64,10 +66,29 @@ noUiSlider.create(imgEffectLevel, {
         'min': 0,
         'max': 1
     },
-    tooltips: true,
     step: 0.1,
 });
 
+
+chromeEff.addEventListener('click', ()=>{
+    imgEffectLevel.noUiSlider.updateOptions({
+        range: {
+            'min': 0,
+            'max': 1
+        },
+        step: 0.1,
+    });
+})
+
+sepiaEff.addEventListener('click', ()=>{
+    imgEffectLevel.noUiSlider.updateOptions({
+        range: {
+            'min': 0,
+            'max': 1
+        },
+        step: 0.1,
+    });
+})
 
 heatEff.addEventListener('click', ()=>{
     imgEffectLevel.noUiSlider.updateOptions({
@@ -107,6 +128,5 @@ imgEffectLevel.noUiSlider.on('update', changeEffect)
 scaleSmoller.addEventListener('click', scaleDown);
 
 scaleBigger.addEventListener('click', increaseScale);
-
 
 

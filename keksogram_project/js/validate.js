@@ -1,4 +1,4 @@
-const hashtagText = document.querySelector('.text__hashtags'),
+export const hashtagText = document.querySelector('.text__hashtags'),
       descriptionText = document.querySelector('.text__description'),
       imgUploadOverlay = document.querySelector('.img-upload__overlay'),
       cancelBtn = document.querySelector('#upload-cancel');
