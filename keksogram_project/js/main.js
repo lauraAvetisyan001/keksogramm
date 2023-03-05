@@ -2,7 +2,7 @@ import {showPopup} from './bigPicture.js';
 import {validateHashtagInput} from './validate.js';
 import {changeEffect} from './filterPhotos.js';
 import {sendPhotos} from './uploadPhoto.js';
-
+import {showImgFiltersBlock} from './filtration.js';
 
 export const photosPromise = await fetch('http://localhost:8000/photos')
     .then(function (resp) {
@@ -38,9 +38,9 @@ const pictureTemplate = document.querySelector('#picture'),
       pictureComment = pictureTemplate.content.querySelector('.picture__comments'),
       pictureLikes = pictureTemplate.content.querySelector('.picture__likes');
 
-const pictureInfo = photosPromise.map((e) => getPictureInfo(e));
+export let pictureInfo = photosPromise.map((e) => getPictureInfo(e));
 
-function getPictureInfo(e){    
+export function getPictureInfo(e){    
     pictureImg.src = e.url;
     pictureImg.dataset.id = e.id;
     pictureComment.textContent = e.comments.length;
@@ -50,7 +50,7 @@ function getPictureInfo(e){
     const cloneTemplate = pictureTemplate.content.cloneNode(true);
     pictures.appendChild(cloneTemplate);
 }; 
-
+showImgFiltersBlock();
 
 showPopup();
 

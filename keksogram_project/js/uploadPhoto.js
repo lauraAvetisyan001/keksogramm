@@ -1,6 +1,6 @@
 import{photosPromise} from './main.js';
 import { hashtagText } from './validate.js';
-
+import {showImgFiltersBlock} from './filtration.js';
 
 const imgForm = document.querySelector('#upload-select-image'),
 textHashtag = document.querySelector('.text__hashtags'),
@@ -47,10 +47,13 @@ imgForm.addEventListener('submit', (e)=>{
         comments: [],
         hashtags: textHashtag.value,
     }; 
-
+    // showImgFiltersBlock()
 const photoInfo = JSON.stringify(photoData);
 sendData('http://localhost:8000/newphoto', photoData)
-    .then(()=>{
+    .then((data)=>{
+        
+        const objData = JSON.parse(data)
+        console.log(objData)
     showSuccessMessage()
     }).catch(()=>{
     showErrorMessage()
@@ -95,6 +98,9 @@ function emptyHashtagsValue(){
     } 
 }
 document.querySelector('.img-upload__submit').addEventListener('click', emptyHashtagsValue)
+textHashtag.addEventListener('input', ()=>{
+    hashtagText.style.border = 'none'
+})
 
 errorBtn.addEventListener('click', ()=>{
     errorInner.classList.add('hidden');
