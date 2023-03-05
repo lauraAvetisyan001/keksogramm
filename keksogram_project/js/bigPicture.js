@@ -1,4 +1,4 @@
-import {data, pictures} from './main.js';
+import {photosPromise, pictures, commentsPromise} from './main.js'; 
 
 const bigPicture = document.querySelector('.big-picture'),
       bigPictureImg = document.querySelector('.big-picture__img img'),
@@ -18,17 +18,17 @@ export function showPopup(){
   pictures.addEventListener('click', (evt)=>{
     currentCommentsCount = 5;
     commentsBtn.classList.remove('hidden');
+    document.body.classList.add('modal-open');
     const photoId = +evt.target.dataset.id;
-    post = data.find(data => data.id === photoId); 
+    post = photosPromise.find(photosPromise => photosPromise.id === photoId); 
     showComments()
     showBigImg(); 
     hiddenCommentsBtn();
-    addComments();
-    
-  })};  
+    addComments(); 
+  })}; 
 
 
-  function showComments(){
+function showComments(){
     post.comments.forEach((comment)=>{
       const socialCommentClone = socialComment.cloneNode(true);
       socialCommentClone.querySelector('.social__text').textContent = comment.message
@@ -45,13 +45,19 @@ export function showPopup(){
 function showCommentsCount(){ 
     if(post.comments.length - currentCommentsCount > 5){
       currentCommentsCount += 5;
-    } else {
+    }
+     else {
       currentCommentsCount = post.comments.length;
     }  
   }
 
+
 function hiddenCommentsBtn(){
   switch(post.comments.length){
+    case 0: 
+    socialCommentsCount.textContent = `Коментарі відсутні, стань першим!`;
+    commentsBtn.classList.add('hidden');
+    break;
     case 3:
       socialCommentsCount.textContent = `${post.comments.length} коментаря`;
       commentsBtn.classList.add('hidden');
@@ -75,19 +81,21 @@ function showBigImg(){
   bigPictureImg.src = post.url;
   likesCount.textContent = post.likes;
   imgDescription.textContent = post.description; 
+  bigPictureImg.style.filter = post.filter;
+  bigPictureImg.style.scale = `${post.scale}%`
   socialCommentsCount.textContent = `${currentCommentsCount} из ${post.comments.length} комментарів`;
 }
 
 const commentsFragment = new DocumentFragment();
 
-function addComments(){
-  
+function addComments(){  
   const commentSlice = post.comments.slice(0, currentCommentsCount);   
     commentSlice.forEach((comment)=>{
     const socialCommentClone = socialComment.cloneNode(true);
       socialCommentClone.querySelector('.social__text').textContent = comment.message
       socialCommentClone.querySelector('.social__picture').alt = comment.name
       socialCommentClone.querySelector('.social__picture').src = comment.avatar
+
       commentsFragment.append(socialCommentClone); 
     })
     socialComments.textContent = '';
@@ -119,3 +127,23 @@ function escBigPhoto(e){
 
 
 document.addEventListener('keydown', escBigPhoto);
+
+
+
+const likesCounter = document.querySelector('.likes-count');
+
+let like = true;
+
+function getLikes(post){
+  if(like){
+    likesCounter.innerText++
+    like = false;
+  } else{
+    likesCounter.innerText--
+    like = true;
+    
+  }
+ 
+}
+
+likesCounter.addEventListener('click', getLikes)
