@@ -26,7 +26,7 @@ export function showPopup(){
     hiddenCommentsBtn();
     addComments(); 
   })}; 
-
+  
 
 function showComments(){
     post.comments.forEach((comment)=>{
