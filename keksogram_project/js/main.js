@@ -38,7 +38,7 @@ const pictureTemplate = document.querySelector('#picture'),
       pictureComment = pictureTemplate.content.querySelector('.picture__comments'),
       pictureLikes = pictureTemplate.content.querySelector('.picture__likes');
 
-export let pictureInfo = photosPromise.map((e) => getPictureInfo(e));
+const pictureInfo = photosPromise.map((e) => getPictureInfo(e));
 
 export function getPictureInfo(e){    
     pictureImg.src = e.url;
