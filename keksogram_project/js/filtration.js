@@ -32,14 +32,14 @@ function addDefaultPhotos(){
     clearPhotos();
     photosPromise.sort((a,b)=> a.id - b.id)
 
-    const defaultPhotosData = photosPromise.map((e) => getPictureInfo(e))
+    const defaultPhotos = photosPromise.map((e) => getPictureInfo(e))
 }
 
 
 function addPopularPhotos(){
     clearPhotos();
     photosPromise.sort((a,b)=> b.comments.length - a.comments.length)
-    const newPhotoData = photosPromise.map((e) => getPictureInfo(e))   
+    const popularPhotos = photosPromise.map((e) => getPictureInfo(e))   
 }; 
 
 function addRandomPhotos(){
@@ -48,7 +48,7 @@ function addRandomPhotos(){
         array.sort(() => Math.random() - 0.5);
       }
       shuffle(photosPromise)
-      const newRandomData = photosPromise.slice(0, 10).map((e) => getPictureInfo(e))
+      const randomPhotos = photosPromise.slice(0, 10).map((e) => getPictureInfo(e))
 }
 
 
